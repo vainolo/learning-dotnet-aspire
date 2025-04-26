@@ -1,4 +1,4 @@
-# Part 2 - starting form scratch
+# Part 2 - Creating a Simple Web App
 
 In the previous tutorial, we took a look at the basic sample Aspire web app works. This time, we'll create
 a new app from scratch to get a better understanding of the basic building blocks of Aspire.
@@ -58,7 +58,7 @@ Two small code changes are needed. First, we add the service defaults configurat
 app so it has the necessary services that are used to run on the Aspire host. We add this on the
 `Program.cs` file of the web app just after creating the builder.:
 
-```
+```csharp
 var builder = WebApplication.CreateBuilder(args);
 builder.AddServiceDefaults();
 ```
@@ -66,7 +66,7 @@ builder.AddServiceDefaults();
 Finally the app project is added to the host builder so the host executes it. This is done in
 the `Program.cs` file of the app host project after creating the builder (promise next time to give better names to these files):
 
-```
+```csharp
 var builder = DistributedApplication.CreateBuilder(args);
 builder.AddProject<Projects.SimpleApp_Web1>("Web1").WithExternalHttpEndpoints();
 ```
