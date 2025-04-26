@@ -1,13 +1,11 @@
 # Part 2 - starting form scratch
 
-In the previous Aspire post, we took a look at the basic sample Aspire web app works. This time, we'll create
+In the previous tutorial, we took a look at the basic sample Aspire web app works. This time, we'll create
 a new app from scratch to get a better understanding of the basic building blocks of Aspire.
 
 First, we create a new Aspire AppHost:
 
-```
-> dotnet new aspire-apphost -n SimpleApp-AppHost
-```
+`> dotnet new aspire-apphost -n SimpleApp-AppHost`
 
 The AppHost is the manager/orchestrator of the distributed application that we are building using the Aspire framework. Since it is an executable application, we can run it. It will not do much, but does run:
 
@@ -39,22 +37,22 @@ Turns out that adding a new application is not complicated at all. First thing t
 the service defaults project, which is the project that defines the shared settings and configurations
 for all the applications that will run with the same host. This is easily done:
 
-> dotnet new aspire-servicedefaults -n SimpleApp-ServiceDefaults
+`> dotnet new aspire-servicedefaults -n SimpleApp-ServiceDefaults`
 
 And while we are creating things, we will also create our web application:
 
-> dotnet new web -n SimpleApp-Web1
+`> dotnet new web -n SimpleApp-Web1`
 
 There are a couple of "wires" that need to be connected so that these three projects (settings,
 host, app) are aware of each other and work together. Applications that run with the host must
 reference the same service defaults project, and the host needs to reference the applications. Adding
 these references is simple. First, we'll add a reference from the web app to the service defaults project.
 
-> dotnet add .\SimpleApp-Web1\SimpleApp-Web1.csproj reference .\SimpleApp-ServiceDefaults\SimpleApp-ServiceDefaults.csproj
+`> dotnet add .\SimpleApp-Web1\SimpleApp-Web1.csproj reference .\SimpleApp-ServiceDefaults\SimpleApp-ServiceDefaults.csproj`
 
 And then a reference from the host to the web app project
 
-> dotnet add .\SimpleApp-AppHost\SimpleApp-AppHost.csproj reference .\SimpleApp-Web1\SimpleApp-Web1.csproj
+`> dotnet add .\SimpleApp-AppHost\SimpleApp-AppHost.csproj reference .\SimpleApp-Web1\SimpleApp-Web1.csproj`
 
 Two small code changes are needed. First, we add the service defaults configuration to our web 
 app so it has the necessary services that are used to run on the Aspire host. We add this on the
@@ -89,7 +87,7 @@ info: Aspire.Hosting.DistributedApplication[0]
 info: Aspire.Hosting.DistributedApplication[0]
       Distributed application starting.
 info: Aspire.Hosting.DistributedApplication[0]
-      Application host directory is: C:\dev\personal-repos\learning-dotnet-aspire\part2-SimpleWebApp\src\SimpleApp-AppHost
+      Application host directory is: <redacted>\src\SimpleApp-AppHost
 info: Aspire.Hosting.DistributedApplication[0]
       Now listening on: https://localhost:17114
 info: Aspire.Hosting.DistributedApplication[0]
